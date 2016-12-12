@@ -15,7 +15,7 @@
 <form id="newUser" action="NewUserPage.php" method="post">
 <p>Bethel ID Number: <input type="text" name="bethelID" value="" required="required" /></p>
 <p>Full Name: <input type="text" name="fullName" value="" required="required" /></p>
-<p>Team: <input type="text" name="teamName" value="" required="required" /></p>
+<p>Team: <input type="text" name="teamName" value="" /></p>
 <input type="submit" name="submit" value="Submit" />
 <?php
     if (isset($_POST["submit"])) {

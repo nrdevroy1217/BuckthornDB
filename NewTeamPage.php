@@ -19,6 +19,7 @@
     else
     {
         echo "Successful connection: " . mysqli_get_host_info($con) . PHP_EOL;
+        $con->autocommit(FALSE);
     }
     
     // Insert Into Team Table
@@ -27,12 +28,15 @@
     /* Print test variables */
     echo $_SESSION["teamName"] . "\n";
     
-    $query = "insert into team(team_name) values('" . $_SESSION["teamName"] . "')";
-    $result = mysqli_query($con, $query);
-    
-    echo $query;
-    
-    echo "<br><br>Observation successfully applied to the database.";
+    try {
+        $query = "insert into team(team_name) values('" . $_SESSION["teamName"] . "')";
+        $result = mysqli_query($con, $query);
+        $con->commit();
+        echo "<br><br>Successfully created team " . $_SESSION[teamName] . "\n";
+    } catch (Exception $e) {
+        $con->rollback();
+        echo "<br><br>Failed to create team.";
+    }
     
     ?>
 </div>

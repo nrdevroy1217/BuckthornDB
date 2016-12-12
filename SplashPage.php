@@ -24,7 +24,7 @@
 	</div>
 	<div id="main">
 		<a href="http://www.mathcs.bethel.edu/~nrd83539/StudentPage.php">Add Observation</a>
-		<a href="">Add New Team</a>		
+		<a href="http://www.mathcs.bethel.edu/~nrd83539/AddUserOrTeam.php">Add Teams or Users</a>
 		<a href="http://www.mathcs.bethel.edu/~nrd83539/UpdateSplashPage.php">Update Tables</a>
 		<a href="http://www.mathcs.bethel.edu/~nrd83539/DeleteValuesSplashPage.php">Delete Values</a>
 		<a href="http://www.mathcs.bethel.edu/~nrd83539/ReportGenerationPage.php">Generate Reports</a>

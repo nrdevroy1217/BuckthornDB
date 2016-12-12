@@ -22,75 +22,87 @@
   			}
 
   			// Insert Into Measurement Table
-			//$_SESSION["TeamID"] = $_POST["TeamID"];
-			//$_SESSION["Date"] = $_POST["Date"];
-			$_SESSION["TeamName"] = $_POST["link1"];
-			echo $_SESSION["TeamName"];
-			//echo $_SESSION["Date"];
-			/*$query = "insert into measurement(date, team_id) values(" . $_SESSION["Date"] . "," . $_SESSION["TeamID"] . ")";
-			echo $query;
+			$_SESSION["TeamName"] = $_POST["teamNameHidden"];
+			$_SESSION["TeamID"] = $_POST["teamIDHidden"];
+			$_SESSION["Date"] = $_POST["dateHidden"];
+			$_SESSION["Latitute"] = $_POST["latitudeHidden"];
+			$_SESSION["Longitude"] = $_POST["longitudeHidden"];
+			$_SESSION["QuadrantSize"] = $_POST["quadrantSizeHidden"];
+			$_SESSION["BuckthornStems"] = $_POST["buckthornStemHidden"];
+			$_SESSION["BuckthornDensity"] = $_POST["buckthornDensityHidden"];
+			$_SESSION["BuckthornCoverage"] = $_POST["buckthornCoverageHidden"];
+			$_SESSION["MedianBuckthorn"] = $_POST["medianBuckthornHidden"];
+			$_SESSION["HabitatDesc"] = $_POST["habitatDescHidden"];
+			$_SESSION["OtherNotes"] = $_POST["otherNotesHidden"];
+			$_SESSION["SpeciesA"] = $_POST["speciesHidden"];
+			$_SESSION["SWI"] = $_POST["swiHidden"];
+			$_SESSION["BiodiversityNotes"] = $_POST["biodivHidden"];		
+			
+			/* Print test variables */
+			/*
+			echo $_SESSION["TeamName"] . "\n";
+			echo $_SESSION["TeamID"] . "\n";
+			echo $_SESSION["Date"] . "\n";
+			echo $_SESSION["Latitute"] . "\n";
+			echo $_SESSION["Longitude"] . "\n";
+			echo $_SESSION["QuadrantSize"] . "\n";
+			echo $_SESSION["BuckthornStems"] . "\n";
+			echo $_SESSION["BuckthornDensity"] . "\n";
+			echo $_SESSION["BuckthornCoverage"] . "\n";
+			echo $_SESSION["MedianBuckthorn"] . "\n";
+			echo $_SESSION["HabitatDesc"] . "\n";
+			echo $_SESSION["OtherNotes"] . "\n";
+			echo $_SESSION["SpeciesA"] . "\n";
+			echo $_SESSION["SWI"] . "\n";
+			echo $_SESSION["BiodiversityNotes"] . "\n";									
+		*/
+
+			$query = "insert into measurement(date, team_id) values(" . "\"" . $_SESSION["Date"] . "\"" . ", " . $_SESSION["TeamID"] . ")";
 			$result = mysqli_query($con, $query);
 
 			// Grabbing measurement_id
-			$query = "select max(measurement_id) from measurement;";
-			$measurementValue = mysqli_query($con, $query);
+			$query = "select max(measurement_id) as 'ID' from measurement";
+			$result = mysqli_query($con, $query);
+			$row = mysqli_fetch_array($result);
+			$measurementID = $row[0] + 1;
 
 			// Insert Into Quadrant Table
-			$_SESSION["Latitude"] = $_POST["Latitude"];
-			$_SESSION["Longitude"] = $_POST["Longitude"];
-			$_SESSION["QuadrantSize"] = $_POST["QuadrantSize"];
-			$_SESSION["HabitatDesc"] = $_POST["HabitatDesc"];
-			$_SESSION["OtherNotes"] = $_POST["OtherNotes"];
-
-			$query = "insert into quadrant(measurement_id, latitude, longitude, size, habitat_desc, notes) 
-						values(" . $measurementValue . "," . 
-						$_SESSION["Latitude"] . "," . 
+			$query = "insert into quadrant(measurement_id, latitude, longitude, size, habitat_desc) 
+						values(" . $measurementID . "," . 
+						$_SESSION["Latitute"] . "," . 
 						$_SESSION["Longitude"] . "," .
 						$_SESSION["QuadrantSize"] . "," . 
-						$_SESSION["HabitatDesc"] . "," . 
-						$_SESSION["OtherNotes"];
+						"\"" . $_SESSION["HabitatDesc"] . "\");";
 			$result = mysqli_query($con, $query);
 
-			// Insert Into Buckthorn Table
-			$_SESSION["BuckthornStems"] = $_POST["BuckthornStems"];
-			$_SESSION["BuckthornDensity"] = $_POST["BuckthornDensity"];
-			$_SESSION["BuckthornCoverage"] = $_POST["BuckthornCoverage"];
-			$_SESSION["MedianBuckthorn"] = $_POST["MedianBuckthorn"];
-			$_SESSION["OtherNotes"] = $_POST["OtherNotes"];
 
+			// Insert Into Buckthorn Table
 			$query = "insert into buckthorn(measurement_id, num_stems, stem_density, 
 						foliar_coverage, median_stem_circum, photos, notes) 
-						values(" . $measurementValue . "," . 
+						values(" . $measurementID . "," . 
 						$_SESSION["BuckthornStems"] . "," . 
 						$_SESSION["BuckthornDensity"] . "," . 
 						$_SESSION["BuckthornCoverage"] . "," . 
 						$_SESSION["MedianBuckthorn"] . "," . 
-						NULL . "," . 
-						$_SESSION["OtherNotes"] . ")";
+						"\"null\"" . "," . 
+						"\"" . $_SESSION["OtherNotes"] . "\")";
 			$result = mysqli_query($con, $query);
 
 			// Insert Into Biodiversity Table
-			$_SESSION["SWI"] = $_POST["SWI"];
-			$_SESSION["BiodiversityNotes"] = $_POST["BiodiversityNotes"];
-
 			$query = "insert into biodiversity(measurement_id, sw_index, notes) 
-						values(" . $measurementValue . "," 
-						$_SESSION["SWI"] = $_POST["SWI"] . "," .
-						$_SESSION["BiodiversityNotes"] . ")";
+				values(" . $measurementID . "," . $_SESSION["SWI"] . "," . "\"" . 
+				$_SESSION["BiodiversityNotes"] . "\")";
 			$result = mysqli_query($con, $query);
 
 			// Insert Into Species Table
-			$_SESSION["SpeciesA"] = $_POST["SpeciesA"];
-
 			$query = "insert into species(measurement_id, species_id, count) 
-						values(" . $measurementValue . "," .
+						values(" . $measurementID . "," .
 						"A" . "," .
-						$_SESSION["SpeciesA"] . ")";
+						"\"" . $_SESSION["SpeciesA"] . "\")";
 
 			$result = mysqli_query($con, $query);
 
-			
-			echo "<br><br>Query: <u>" . $query . " </u>applied to the database."; */
+			echo "<br><br>Observation successfully applied to the database."; 
 
 		?>
 	</div>

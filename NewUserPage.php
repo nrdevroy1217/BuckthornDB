@@ -23,24 +23,22 @@
     
     // Insert Into Measurement Table
     $_SESSION["bethelID"] = $_POST["bethelID"];
-    $_SESSION["fullName"] = $_POST["nameVal"];
-    $_SESSION["teamName"] = $_POST["teamVal"];
+    $_SESSION["fullName"] = $_POST["fullName"];
+    $_SESSION["teamName"] = $_POST["teamName"];
     
     /* Print test variables */
-    /*
-     echo $_SESSION["TeamName"] . "\n";
-     echo $_SESSION["TeamID"] . "\n";
-     echo $_SESSION["teamName"] ."\n";
-     */
+    //echo $_SESSION["bethelID"] . "\n";
+    //echo $_SESSION["fullName"] . "\n";
+    //echo $_SESSION["teamName"] ."\n";
     
-    $getTIDQuery = "select team_id from team where team_name = '" . $_SESSION["TeamName"] . "'";
+    $getTIDQuery = "select team_id from team where team_name = '" . $_SESSION["teamName"] . "'";
     $result = mysqli_query($con, $getTIDQuery);
     $row = mysqli_fetch_array($result);
     $teamID = $row[0];
+    echo "\n" . $getTIDQuery . " " . $teamID;
     
     $query = "insert into team_member(bethel_id, name, team_id) values(" . $_SESSION["bethelID"] . ", '" . $_SESSION["fullName"] . "', " . $teamID . ")";
     $result = mysqli_query($con, $query);
-    
     
     echo "<br><br>Observation successfully applied to the database.";
     

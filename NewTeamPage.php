@@ -21,17 +21,16 @@
         echo "Successful connection: " . mysqli_get_host_info($con) . PHP_EOL;
     }
     
-    // Insert Into Measurement Table
-    $_SESSION["teamName"] = $_POST["teamNameVal"];
+    // Insert Into Team Table
+    $_SESSION["teamName"] = $_POST["teamName"];
     
     /* Print test variables */
-    /*
-     echo $_SESSION["teamName"] . "\n";
-     */
+    echo $_SESSION["teamName"] . "\n";
     
-    $query = "insert into team(team_name) values('" . $_SESSION["team_name"] . "')";
+    $query = "insert into team(team_name) values('" . $_SESSION["teamName"] . "')";
     $result = mysqli_query($con, $query);
     
+    echo $query;
     
     echo "<br><br>Observation successfully applied to the database.";
     

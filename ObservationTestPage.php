@@ -64,7 +64,7 @@
 			$query = "select max(measurement_id) as 'ID' from measurement";
 			$result = mysqli_query($con, $query);
 			$row = mysqli_fetch_array($result);
-			$measurementID = $row[0] + 1;
+			$measurementID = $row[0];
 
 			// Insert Into Quadrant Table
 			$query = "insert into quadrant(measurement_id, latitude, longitude, size, habitat_desc) 
@@ -97,12 +97,12 @@
 			// Insert Into Species Table
 			$query = "insert into species(measurement_id, species_id, count) 
 						values(" . $measurementID . "," .
-						"A" . "," .
-						"\"" . $_SESSION["SpeciesA"] . "\")";
+						"'A'" . "," . 
+						$_SESSION["SpeciesA"] . ")";
 
 			$result = mysqli_query($con, $query);
 
-			echo "<br><br>Observation successfully applied to the database."; 
+			echo "<br><br>Observation: <u>" . $query . " </u>applied to the database."; 
 
 		?>
 	</div>

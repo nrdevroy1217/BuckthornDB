@@ -22,14 +22,23 @@
     }
     
     // Insert Into Measurement Table
-    $_SESSION["teamName"] = $_POST["teamNameVal"];
+    $_SESSION["bethelID"] = $_POST["bethelID"];
+    $_SESSION["fullName"] = $_POST["nameVal"];
+    $_SESSION["teamName"] = $_POST["teamVal"];
     
     /* Print test variables */
     /*
-     echo $_SESSION["teamName"] . "\n";
+     echo $_SESSION["TeamName"] . "\n";
+     echo $_SESSION["TeamID"] . "\n";
+     echo $_SESSION["teamName"] ."\n";
      */
     
-    $query = "insert into team(team_name) values('" . $_SESSION["team_name"] . "')";
+    $getTIDQuery = "select team_id from team where team_name = '" . $_SESSION["TeamName"] . "'";
+    $result = mysqli_query($con, $getTIDQuery);
+    $row = mysqli_fetch_array($result);
+    $teamID = $row[0];
+    
+    $query = "insert into team_member(bethel_id, name, team_id) values(" . $_SESSION["bethelID"] . ", '" . $_SESSION["fullName"] . "', " . $teamID . ")";
     $result = mysqli_query($con, $query);
     
     

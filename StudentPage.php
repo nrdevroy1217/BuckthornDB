@@ -28,65 +28,77 @@
 				</ul>
 				<!-- Content for Team Info Tab -->			
 				<div id="TeamInfo" class="tabcontent">						
-					<p>Team Name: <input type="text" id="teamVal" name="TeamName" value="" required="required" onblur="blurFunc()" /></p>
-					<p>Team ID: <input type="text" name="TeamID" value="" required="required" /></p>
-					<p>Date (yyyy/mm/dd): <input type="text" name="Date" value="" required="required" /></p>
+					<p>Team Name: <input type="text" id="teamVal" name="TeamName" value="" required="required" onblur="teamNameBlurFunc()" /></p>
+					<p>Team ID: <input type="text" id="idVal" name="TeamID" value="" required="required" onblur="teamIDBlurFunc()" /></p>
+					<p>Date (yyyy/mm/dd): <input type="text" id="dateVal" name="Date" value="" required="required" onblur="dateBlurFunc()" /></p>
 				</div>
 
 				<!-- Content for Quadrant and Buckthorn Info Tab -->
 				<div id="BuckthornInfo" class="tabcontent">
 					<h3>Quadrant</h3>
-					<p>Latitude: <input type="text" name="Latitute" value="" required="required"></p>
-					<p>Longitude: <input type="text" name="Longitude" value="" required="required"></p>
-					<p>Quadrant Size: <input type="text" name="QuadrantSize" value="" required="required"></p>
+					<p>Latitude: <input type="text" id="latitudeVal" name="Latitute" value="" required="required" onblur="latitudeValFunc()" /></p>
+					<p>Longitude: <input type="text" id="longitudeVal" name="Longitude" value="" required="required" onblur="longitudeValFunc()" /></p>
+					<p>Quadrant Size: <input type="text" id="quadSizeVal" name="QuadrantSize" value="" required="required" onblur="quadSizeValFunc()" /></p>
 					
 					<h3>Buckthorn</h3>
-					<p># Buckthron Stems: <input type="text" name="BuckthornStems" value=""></p>
-					<p>Buckthorn Stem Density: <input type="text" name="BuckthornDensity" value=""></p>
-					<p>% Buckthorn Foliar Coverage: <input type="text" name="BuckthornCoverage" value=""></p>
-					<p>Median Buckthorn Stem: <input type="text" name="MedianBuckthorn" value=""></p>
-					<p>Habitat description: </br><textarea name="HabitatDesc" value="" rows="5" cols="50"></textarea></p>
-					<p>Other Notes: </br><textarea name="OtherNotes" value="" rows="5" cols="50"></textarea></p>
+					<p># Buckthorn Stems: <input type="text" id="buckthornStemVal" name="BuckthornStems" value="" onblur="buckthornStemValFunc()" /></p>
+					<p>Buckthorn Stem Density: <input type="text" id="buckthornDensityVal" name="BuckthornDensity" value="" onblur="buckthornDensityValFunc()" /></p>
+					<p>% Buckthorn Foliar Coverage: <input type="text" id="buckthornCoverageVal" name="BuckthornCoverage" value="" onblur="buckthornCoverageValFunc()" /></p>
+					<p>Median Buckthorn Stem: <input type="text" id="medBuckthornVal" name="MedianBuckthorn" value="" onblur="medBuckthornValFunc()" /></p>
+					<p>Habitat description: </br><textarea name="HabitatDesc" id="habDescVal" value="" rows="5" cols="50" onblur="habDescValFunc()" ></textarea></p>
+					<p>Other Notes: </br><textarea name="OtherNotes" id="otherNotesVal"value="" rows="5" cols="50" onblur="otherNotesValFunc()"></textarea></p>
 				</div>
 
 				<div id="BiodiversityInfo" class="tabcontent">
 					<div id="species">
-					<p>Species (A): <input type="text" name="SpeciesA" value="" required="required"></p>
+					<p>Species (A): <input type="text" id="speciesVal" name="SpeciesA" value="" required="required" onblur="speciesFunc()" /></p>
 					</div>
 					<!-- Function to add more species -->
 					<button type="button" onclick="addSpecies()">Add Species</button>
-					<p>Shannon-Wiener Index: <input type="text" name="SWI" value=""></p>
-					<p>Biodiversity Notes: </br><textarea name="BiodiversityNotes" value="" rows="5" cols="50"></textarea></p>
+					<p>Shannon-Wiener Index: <input type="text" id="swiVal" name="SWI" value="" onblur="swiFunc()" /></p>
+					<p>Biodiversity Notes: </br><textarea name="BiodiversityNotes" id="biodivVal" value="" rows="5" cols="50" onblur="biodivFunc()"></textarea></p>
 				</div>
 				
 				<div id="SubmitTab" class="tabcontent">
 					<h4> **Please double check your data before submitting!**</br></br> Please click submit when you are done.</h4>
 					<form id="sendData" action="ObservationTestPage.php" method="post">
 					<input type="submit" name="submit" value="Submit" />
-					<input type="hidden" id="link1" name="link1" value="0"/>
+					<input type="hidden" id="teamNameHidden" name="teamNameHidden" value="0"/>
+					<input type="hidden" id="teamIDHidden" name="teamIDHidden" value="0"/>
+					<input type="hidden" id="dateHidden" name="dateHidden" value="0"/>
+					<input type="hidden" id="latitudeHidden" name="latitudeHidden" value="0"/>
+					<input type="hidden" id="longitudeHidden" name="longitudeHidden" value="0"/>
+					<input type="hidden" id="quadrantSizeHidden" name="quadrantSizeHidden" value="0"/>
+					<input type="hidden" id="buckthornStemHidden" name="buckthornStemHidden" value="0"/>
+					<input type="hidden" id="buckthornDensityHidden" name="buckthornDensityHidden" value="0"/>
+					<input type="hidden" id="buckthornCoverageHidden" name="buckthornCoverageHidden" value="0"/>
+					<input type="hidden" id="medianBuckthornHidden" name="medianBuckthornHidden" value="0"/>
+					<input type="hidden" id="habitatDescHidden" name="habitatDescHidden" value="0"/>
+					<input type="hidden" id="otherNotesHidden" name="otherNotesHidden" value="0"/>	
+					<input type="hidden" id="speciesHidden" name="speciesHidden" value="0"/>	
+					<input type="hidden" id="swiHidden" name="swiHidden" value="0"/>	
+					<input type="hidden" id="biodivHidden" name="biodivHidden" value="0"/>																																																												
 					<?php
 						if (isset($_POST["submit"])) {
-						$_SESSION["TeamName"] = $_POST["link1"];
-						//$_SESSION["TeamID"] = $teamID;
-						//$_SESSION["Date"] = $date;
-						//$_SESSION["Latitute"] = $_POST["Latitute"];
-						//$_SESSION["Longitude"] = $_POST["Longitude"];
-						//$_SESSION["QuadrantSize"] = $_POST["QuadrantSize"];
-						//$_SESSION["BuckthornStems"] = $_POST["BuckthornStems"];
-						//$_SESSION["BuckthornDensity"] = $_POST["BuckthornDensity"];
-						//$_SESSION["BuckthornCoverage"] = $_POST["BuckthornCoverage"];
-						//$_SESSION["MedianBuckthorn"] = $_POST["MedianBuckthorn"];
-						//$_SESSION["HabitatDesc"] = $_POST["HabitatDesc"];
-						//$_SESSION["OtherNotes"] = $_POST["OtherNotes"];
-						//$_SESSION["SpeciesA"] = $_POST["SpeciesA"];
-						//$_SESSION["SWI"] = $_POST["SWI"];
-						//$_SESSION["BiodiversityNotes"] = $_POST["BiodiversityNotes"];
+						$_SESSION["TeamName"] = $_POST["teamNameHidden"];
+						$_SESSION["TeamID"] = $_POST["teamIDHidden"];
+						$_SESSION["Date"] = $_POST["dateHidden"];
+						$_SESSION["Latitute"] = $_POST["latitudeHidden"];
+						$_SESSION["Longitude"] = $_POST["longitudeHidden"];
+						$_SESSION["QuadrantSize"] = $_POST["quadrantSizeHidden"];
+						$_SESSION["BuckthornStems"] = $_POST["buckthornStemHidden"];
+						$_SESSION["BuckthornDensity"] = $_POST["buckthornDensityHidden"];
+						$_SESSION["BuckthornCoverage"] = $_POST["buckthornCoverageHidden"];
+						$_SESSION["MedianBuckthorn"] = $_POST["medianBuckthornHidden"];
+						$_SESSION["HabitatDesc"] = $_POST["habitatDescHidden"];
+						$_SESSION["OtherNotes"] = $_POST["otherNotesHidden"];
+						$_SESSION["SpeciesA"] = $_POST["speciesHidden"];
+						$_SESSION["SWI"] = $_POST["swiHidden"];
+						$_SESSION["BiodiversityNotes"] = $_POST["biodivHidden"];
 						}
 					?>
 					</form>
-				</div>
-	
-				
+				</div>	
 			</div>
 		</body>
 	</html>

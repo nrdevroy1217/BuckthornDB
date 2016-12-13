@@ -19,12 +19,14 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
+// Increases value c to next ascii value
 function nextChar(c) {
     return String.fromCharCode(c.charCodeAt(0) + 1);
 }
 
 var speciesLetter = "B";
 
+// adds another species field for the user to input to
 function addSpecies() {
     var newParagraph = document.createElement("p");
     var newInput = document.createElement("input");
@@ -40,10 +42,22 @@ function checkData() {
     // figure out SWI
 }
 
-function resetData(){
-    // reset all data to ""
-    // increase observation # by 1
+// Checks if the val is a number or not; if not a number return false
+function validateNumber(val) {
+    if (isNaN(val)) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
+function validateDate(val) {
+    if(val.match(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/))
+    {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function teamNameBlurFunc() {
@@ -53,57 +67,104 @@ function teamNameBlurFunc() {
 }
 
 function teamIDBlurFunc() {
-    var val = document.getElementById("idVal").value;
+    var val = document.getElementsByClassName("idVal").value;
     document.getElementById("teamIDHidden").value = val;
     var updated = document.getElementById("teamIDHidden").value;
 }
 
 function dateBlurFunc() {
     var val = document.getElementById("dateVal").value;
-    document.getElementById("dateHidden").value = val;
-    var updated = document.getElementById("dateHidden").value;
+    if(validateDate(val) === false) {
+        alert('Your date is incorrect or is formatted incorrectly.');
+    } else {
+        document.getElementById("dateHidden").value = val;
+        var updated = document.getElementById("dateHidden").value;
+    }
 }
 
+// Checks if latitude value is a number, if not alert and error message and delete value
 function latitudeValFunc() {
     var val = document.getElementById("latitudeVal").value;
-    document.getElementById("latitudeHidden").value = val;
-    var updated = document.getElementById("latitudeHidden").value;
+    if(validateNumber(val) === false) {
+        alert('Your coordinate input is incorrect. Please enter a valid coordinate.');
+        document.getElementById("latitudeVal").value = "";       
+    } else {
+        document.getElementById("latitudeHidden").value = val;
+        var updated = document.getElementById("latitudeHidden").value;
+    }
 }
 
+// Checks if longitude value is a number, if not alert and error message and delete value
 function longitudeValFunc() {
     var val = document.getElementById("longitudeVal").value;
-    document.getElementById("longitudeHidden").value = val;
-    var updated = document.getElementById("longitudeHidden").value;
+    if(validateNumber(val) === false) {
+        alert('Your coordinate input is incorrect. Please enter a valid coordinate.');
+        document.getElementById("longitudeVal").value = "";           
+    } else {
+        document.getElementById("longitudeHidden").value = val;
+        var updated = document.getElementById("longitudeHidden").value;
+    }
+
 }
 
+// Checks if Quadrant value is a number, if not alert and error message and delete value
 function quadSizeValFunc() {
     var val = document.getElementById("quadSizeVal").value;
-    document.getElementById("quadrantSizeHidden").value = val;
-    var updated = document.getElementById("quadrantSizeHidden").value;
+    if(validateNumber(val) === false) {
+        alert('Your quandrant size value is incorrect. Value must be a number.');
+        document.getElementById("quadSizeVal").value = "";
+    } else {
+        document.getElementById("quadrantSizeHidden").value = val;
+        var updated = document.getElementById("quadrantSizeHidden").value;
+    }
 }
 
+// Checks if # buckthorn stem value is a number, if not alert and error message and delete value
 function buckthornStemValFunc() {
     var val = document.getElementById("buckthornStemVal").value;
-    document.getElementById("buckthornStemHidden").value = val;
-    var updated = document.getElementById("buckthornStemHidden").value;
+    if(validateNumber(val) === false) {
+        alert('Your value of buckthorn stems is incorrect. Value must be a number.');
+        document.getElementById("buckthornStemVal").value = "";
+    } else {
+        document.getElementById("buckthornStemHidden").value = val;
+        var updated = document.getElementById("buckthornStemHidden").value;
+    }
 }
 
+// Checks if buckthorn density value is a number, if not alert and error message and delete value
 function buckthornDensityValFunc() {
     var val = document.getElementById("buckthornDensityVal").value;
-    document.getElementById("buckthornDensityHidden").value = val;
-    var updated = document.getElementById("buckthornDensityHidden").value;
+    if(validateNumber(val) === false) {
+        alert('Your buckthorn density value is incorrect. Value must be a number.');
+        document.getElementById("buckthornDensityVal").value = "";
+    } else {
+        document.getElementById("buckthornDensityHidden").value = val;
+        var updated = document.getElementById("buckthornDensityHidden").value;
+    }
 }
 
+// Checks if buckthorn coverage value is a number, if not alert and error message and delete value
 function buckthornCoverageValFunc() {
     var val = document.getElementById("buckthornCoverageVal").value;
-    document.getElementById("buckthornCoverageHidden").value = val;
-    var updated = document.getElementById("buckthornCoverageHidden").value;
+    if(validateNumber(val) === false) {
+        alert('Your buckthorn coverage value is incorrect. Value must be a number.');
+        document.getElementById("buckthornCoverageVal").value = "";
+    } else {
+        document.getElementById("buckthornCoverageHidden").value = val;
+        var updated = document.getElementById("buckthornCoverageHidden").value;
+    }
 }
 
+// Checks if Median buckthorn value is a number, if not alert and error message and delete value
 function medBuckthornValFunc() {
     var val = document.getElementById("medBuckthornVal").value;
-    document.getElementById("medianBuckthornHidden").value = val;
-    var updated = document.getElementById("medianBuckthornHidden").value;
+    if(validateNumber(val) === false) {
+        alert('Your buckthorn coverage value is incorrect. Value must be a number.');
+        document.getElementById("medBuckthornVal").value = "";
+    } else {
+        document.getElementById("medianBuckthornHidden").value = val;
+        var updated = document.getElementById("medianBuckthornHidden").value;
+    }
 }
 
 function habDescValFunc() {

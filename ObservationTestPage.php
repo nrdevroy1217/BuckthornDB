@@ -10,6 +10,8 @@
 		<h1>Query Results</h1>
 	</div>
 	<div id="main">
+		
+		<!-- Set up Connection -->
 		<?php
 			$con = mysqli_connect("localhost","nrd83539","Elijah#1027","BuckthornDB");
 			if (mysqli_connect_errno())
@@ -23,7 +25,15 @@
 
   			// Insert Into Measurement Table
 			$_SESSION["TeamName"] = $_POST["teamNameHidden"];
-			$_SESSION["TeamID"] = $_POST["teamIDHidden"];
+
+			// Generate TeamID based on team name selection
+			$query = "select team_id from team where team_name = " . "\"" . $_SESSION["TeamName"] . "\"";
+			$result = mysqli_query($con, $query);					
+			$row = mysqli_fetch_array($result);
+			$t_id = $row[0];
+			$_SESSION["TeamID"] = $t_id;
+
+			// Grab Session variables
 			$_SESSION["Date"] = $_POST["dateHidden"];
 			$_SESSION["Latitute"] = $_POST["latitudeHidden"];
 			$_SESSION["Longitude"] = $_POST["longitudeHidden"];
@@ -37,26 +47,8 @@
 			$_SESSION["SpeciesA"] = $_POST["speciesHidden"];
 			$_SESSION["SWI"] = $_POST["swiHidden"];
 			$_SESSION["BiodiversityNotes"] = $_POST["biodivHidden"];		
-			
-			/* Print test variables */
-			/*
-			echo $_SESSION["TeamName"] . "\n";
-			echo $_SESSION["TeamID"] . "\n";
-			echo $_SESSION["Date"] . "\n";
-			echo $_SESSION["Latitute"] . "\n";
-			echo $_SESSION["Longitude"] . "\n";
-			echo $_SESSION["QuadrantSize"] . "\n";
-			echo $_SESSION["BuckthornStems"] . "\n";
-			echo $_SESSION["BuckthornDensity"] . "\n";
-			echo $_SESSION["BuckthornCoverage"] . "\n";
-			echo $_SESSION["MedianBuckthorn"] . "\n";
-			echo $_SESSION["HabitatDesc"] . "\n";
-			echo $_SESSION["OtherNotes"] . "\n";
-			echo $_SESSION["SpeciesA"] . "\n";
-			echo $_SESSION["SWI"] . "\n";
-			echo $_SESSION["BiodiversityNotes"] . "\n";									
-		*/
 
+			// Insert into measurement table
 			$query = "insert into measurement(date, team_id) values(" . "\"" . $_SESSION["Date"] . "\"" . ", " . $_SESSION["TeamID"] . ")";
 			$result = mysqli_query($con, $query);
 
@@ -101,9 +93,7 @@
 						$_SESSION["SpeciesA"] . ")";
 
 			$result = mysqli_query($con, $query);
-
-			echo "<br><br>Observation: <u>" . $query . " </u>applied to the database."; 
-
+			echo "<br><br>Observation successfully applied to the database."; 
 		?>
 	</div>
 </body>

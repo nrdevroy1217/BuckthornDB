@@ -44,20 +44,71 @@ function checkData() {
 
 // Checks if the val is a number or not; if not a number return false
 function validateNumber(val) {
-    if (isNaN(val)) {
+    if (isNaN(val) || val < 0) {
         return false;
     } else {
         return true;
     }
 }
 
+function validateAgainstCurrent(val) {
+    var d = new Date();
+    var year = val.substring(0,4);
+    var month = val.substring(5,7);
+    var day = val.substring(8,10);
+
+    month -= 1;
+
+    if(year <= d.getFullYear()) {
+        if(month < d.getMonth()) {
+            return true;
+        }
+        if(month == d.getMonth()) {
+            if(day <= d.getDate()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+} 
+
 function validateDate(val) {
-    if(val.match(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/))
-    {
-        return true;
+    if(val.match(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/) && validateAgainstCurrent(val) == true) {
+        if(val.charAt(6) == 2) {
+            if(val.charAt(8) <= 2 && val.charAt(9) <= 8) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if((val.charAt(6) == 9) || (val.charAt(6) == 4) || (val.charAt(6) == 6) ||
+                (val.charAt(6) == 11)) {
+            if(val.charAt(8) == 3) {
+                if(val.charAt(9) <= 0) {
+                    return true; 
+                } else {
+                    return false;                   
+                }
+            }
+        } else {
+            return true;
+        }
     } else {
         return false;
     }
+}
+
+function formatString(val) {
+    var newVal = val
+    for(var i = 0; i < newVal.length; i++) {
+        if(newVal.charAt(i) == '"') {
+            newVal = newVal.substring(0, i) + "\\" + newVal.substring(i, newVal.length);
+            i++;
+        }
+    }
+    return newVal;
 }
 
 function teamNameBlurFunc() {
@@ -76,6 +127,7 @@ function dateBlurFunc() {
     var val = document.getElementById("dateVal").value;
     if(validateDate(val) === false) {
         alert('Your date is incorrect or is formatted incorrectly.');
+        document.getElementById("dateVal").value = "";  
     } else {
         document.getElementById("dateHidden").value = val;
         var updated = document.getElementById("dateHidden").value;
@@ -146,7 +198,7 @@ function buckthornDensityValFunc() {
 // Checks if buckthorn coverage value is a number, if not alert and error message and delete value
 function buckthornCoverageValFunc() {
     var val = document.getElementById("buckthornCoverageVal").value;
-    if(validateNumber(val) === false) {
+    if(validateNumber(val) === false || val > 100) { //Value should not be > 100%
         alert('Your buckthorn coverage value is incorrect. Value must be a number.');
         document.getElementById("buckthornCoverageVal").value = "";
     } else {
@@ -167,14 +219,9 @@ function medBuckthornValFunc() {
     }
 }
 
-function habDescValFunc() {
-    var val = document.getElementById("habDescVal").value;
-    document.getElementById("habitatDescHidden").value = val;
-    var updated = document.getElementById("habitatDescHidden").value;
-}
-
 function otherNotesValFunc() {
     var val = document.getElementById("otherNotesVal").value;
+    val = formatString(val);   
     document.getElementById("otherNotesHidden").value = val;
     var updated = document.getElementById("otherNotesHidden").value;
 }
@@ -193,6 +240,7 @@ function swiFunc() {
 
 function biodivFunc() {
     var val = document.getElementById("biodivVal").value;
+    val = formatString(val);      
     document.getElementById("biodivHidden").value = val;
     var updated = document.getElementById("biodivHidden").value;  
 }

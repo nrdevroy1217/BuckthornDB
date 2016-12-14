@@ -1,9 +1,9 @@
 <!DOCTYPE html> 
 <html>
-	<head>
+	<head>	
 		<link href="http://www.mathcs.bethel.edu/~nrd83539/student.css" rel="stylesheet">
 		<script type="text/javascript" src="http://www.mathcs.bethel.edu/~nrd83539/studentScript.js"></script>		
-			<title>Student Access</title>
+		<title>Student Access</title>
 		</head>
 		<body>
 		<div id="headerPanel">
@@ -12,16 +12,16 @@
 		<div id="tabbedPane">
 			<ul class="tab">
 				<li>
-					<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'TeamInfo')">Team Info</a>
+					<a href="javascript:void(0)"  id="tab1" class="tablinks" onclick="openTab(event, 'TeamInfo')">Team Info</a>
 				</li>
 				<li>
-					<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'BuckthornInfo')">Buckthorn Info</a>
+					<a href="javascript:void(0)" id="tab2" class="tablinks" onclick="openTab(event, 'BuckthornInfo')">Buckthorn Info</a>
 				</li>
 				<li>
-					<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'BiodiversityInfo')">Biodiversity Info</a>
+					<a href="javascript:void(0)" id="tab3" class="tablinks" onclick="openTab(event, 'BiodiversityInfo')">Biodiversity Info</a>
 				</li>
 				<li>
-					<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'SubmitTab')">Submit</a>
+					<a href="javascript:void(0)" id="tab4" class="tablinks" onclick="openTab(event, 'SubmitTab'); submitFunc()">Submit</a>
 				</li>	
 			</ul>
 			<!-- Content for Team Info Tab -->			
@@ -73,10 +73,12 @@
 				<form id="sendData" action="ObservationTestPage.php" method="post">
 				
 				<!-- Submit Button -->
-				<input type="submit" name="submit" value="Submit" />
+				<input type="submit" id="submitB" name="submit" value="Submit" />
 				
-				<!-- Hidden Fields -->
-				<!--input type="hidden" id="teamNameHidden" name="teamNameHidden" value="0"/-->
+				<!-- Run quick script to start on "Team Info" Page, so user can't bypass -->
+				<script type="text/javascript">
+				   document.getElementById("tab1").click();
+				</script>
 				<?php					
 					$query = "select team_name from team";
 					$result = mysqli_query($con, $query);
@@ -84,7 +86,7 @@
 					$t_name = $row[0];
 					echo "<input type=\"hidden\" id=\"teamNameHidden\" name=\"teamNameHidden\" value=\"" . $t_name . "\"/>";				
 				?>					
-
+				<!-- Hidden Fields -->
 				<input type="hidden" id="dateHidden" name="dateHidden" value="0"/>
 				<input type="hidden" id="latitudeHidden" name="latitudeHidden" value="0"/>
 				<input type="hidden" id="longitudeHidden" name="longitudeHidden" value="0"/>

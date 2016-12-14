@@ -42,7 +42,6 @@
 			$_SESSION["BuckthornDensity"] = $_POST["buckthornDensityHidden"];
 			$_SESSION["BuckthornCoverage"] = $_POST["buckthornCoverageHidden"];
 			$_SESSION["MedianBuckthorn"] = $_POST["medianBuckthornHidden"];
-			$_SESSION["HabitatDesc"] = $_POST["habitatDescHidden"];
 			$_SESSION["OtherNotes"] = $_POST["otherNotesHidden"];
 			$_SESSION["SpeciesA"] = $_POST["speciesHidden"];
 			$_SESSION["SWI"] = $_POST["swiHidden"];
@@ -93,6 +92,8 @@
 						$_SESSION["SpeciesA"] . ")";
 
 			$result = mysqli_query($con, $query);
+
+
 			echo "<br><br>Observation successfully applied to the database."; 
 		?>
 	</div>

@@ -54,7 +54,6 @@
 					<p>Buckthorn Stem Density: <input type="text" id="buckthornDensityVal" name="BuckthornDensity" value="" onblur="buckthornDensityValFunc()" /></p>
 					<p>% Buckthorn Foliar Coverage: <input type="text" id="buckthornCoverageVal" name="BuckthornCoverage" value="" onblur="buckthornCoverageValFunc()" /></p>
 					<p>Median Buckthorn Stem: <input type="text" id="medBuckthornVal" name="MedianBuckthorn" value="" onblur="medBuckthornValFunc()" /></p>
-					<p>Habitat description: </br><textarea name="HabitatDesc" id="habDescVal" value="" rows="5" cols="50" onblur="habDescValFunc()" ></textarea></p>
 					<p>Other Notes: </br><textarea name="OtherNotes" id="otherNotesVal"value="" rows="5" cols="50" onblur="otherNotesValFunc()"></textarea></p>
 				</form>
 			</div>
@@ -77,7 +76,15 @@
 				<input type="submit" name="submit" value="Submit" />
 				
 				<!-- Hidden Fields -->
-				<input type="hidden" id="teamNameHidden" name="teamNameHidden" value="0"/>
+				<!--input type="hidden" id="teamNameHidden" name="teamNameHidden" value="0"/-->
+				<?php					
+					$query = "select team_name from team";
+					$result = mysqli_query($con, $query);
+					$row = mysqli_fetch_array($result);
+					$t_name = $row[0];
+					echo "<input type=\"hidden\" id=\"teamNameHidden\" name=\"teamNameHidden\" value=\"" . $t_name . "\"/>";				
+				?>					
+
 				<input type="hidden" id="dateHidden" name="dateHidden" value="0"/>
 				<input type="hidden" id="latitudeHidden" name="latitudeHidden" value="0"/>
 				<input type="hidden" id="longitudeHidden" name="longitudeHidden" value="0"/>
@@ -86,7 +93,6 @@
 				<input type="hidden" id="buckthornDensityHidden" name="buckthornDensityHidden" value="0"/>
 				<input type="hidden" id="buckthornCoverageHidden" name="buckthornCoverageHidden" value="0"/>
 				<input type="hidden" id="medianBuckthornHidden" name="medianBuckthornHidden" value="0"/>
-				<input type="hidden" id="habitatDescHidden" name="habitatDescHidden" value="0"/>
 				<input type="hidden" id="otherNotesHidden" name="otherNotesHidden" value="0"/>	
 				<input type="hidden" id="speciesHidden" name="speciesHidden" value="0"/>	
 				<input type="hidden" id="swiHidden" name="swiHidden" value="0"/>	
@@ -102,7 +108,6 @@
 					$_SESSION["BuckthornDensity"] = $_POST["buckthornDensityHidden"];
 					$_SESSION["BuckthornCoverage"] = $_POST["buckthornCoverageHidden"];
 					$_SESSION["MedianBuckthorn"] = $_POST["medianBuckthornHidden"];
-					$_SESSION["HabitatDesc"] = $_POST["habitatDescHidden"];
 					$_SESSION["OtherNotes"] = $_POST["otherNotesHidden"];
 					$_SESSION["SpeciesA"] = $_POST["speciesHidden"];
 					$_SESSION["SWI"] = $_POST["swiHidden"];

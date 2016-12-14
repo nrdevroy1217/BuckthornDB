@@ -19,6 +19,62 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
+// Checks all required fields and disables submit feature until fields are populated
+function submitFunc() {
+    var date = document.getElementById("dateVal").value;
+    var lat = document.getElementById("latitudeVal").value;
+    var lon = document.getElementById("longitudeVal").value;
+    var stems = document.getElementById("buckthornStemVal").value;
+    var density = document.getElementById("buckthornDensityVal").value;
+    var cov = document.getElementById("buckthornCoverageVal").value;
+    var med = document.getElementById("medBuckthornVal").value;     
+
+    var str = "";
+
+    if(isEmpty(date)) {
+        var error = "- Date value cannot be empty.\n"
+        str += error;
+    }       
+
+    if(isEmpty(lat)) {
+        var error = "- Latitude value cannot be empty.\n"
+        str += error;
+    }   
+
+    if(isEmpty(lon)) {
+        var error = "- Longitude value cannot be empty.\n"
+        str += error;
+    }      
+
+    if(isEmpty(stems)) {
+        var error = "- # Buckthorn Stems value cannot be empty.\n"
+        str += error;
+    }   
+
+    if(isEmpty(density)) {
+        var error = "- Buckthorn Stem Density value cannot be empty.\n"
+        str += error;
+    }   
+
+    if(isEmpty(cov)) {
+        var error = "- Buckthorn Foliar Coverage value cannot be empty.\n"
+        str += error;
+    }   
+
+    if(isEmpty(med)) {
+        var error = "- Median Buckthorn Stem value cannot be empty.\n"
+        str += error;
+    }     
+
+    if(!isEmpty(str)) {
+        str += "\nSubmit function deactivated until required fields are fixed";
+        alert(str);
+        document.getElementById("submitB").style.visibility = "hidden";
+    } else {
+        document.getElementById("submitB").style.visibility = "visible";        
+    }
+}
+
 // Increases value c to next ascii value
 function nextChar(c) {
     return String.fromCharCode(c.charCodeAt(0) + 1);
@@ -68,21 +124,33 @@ function validateAgainstCurrent(val) {
                 return true;
             } else {
                 return false;
-            }
+            }s
         } else {
             return false;
         }
     }
 } 
 
+function isEmpty(val) {
+    if(val.match(/^([\s])*$/)) {
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
 function validateDate(val) {
-    if(val.match(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/) && validateAgainstCurrent(val) == true) {
+    if(val.match(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/) && 
+        validateAgainstCurrent(val) == true) {
+        //If month is February: limit dates > 28
         if(val.charAt(6) == 2) {
             if(val.charAt(8) <= 2 && val.charAt(9) <= 8) {
                 return true;
             } else {
                 return false;
             }
+        //If month is April, June, November, September: limit dates > 30    
         } else if((val.charAt(6) == 9) || (val.charAt(6) == 4) || (val.charAt(6) == 6) ||
                 (val.charAt(6) == 11)) {
             if(val.charAt(8) == 3) {
@@ -92,6 +160,7 @@ function validateDate(val) {
                     return false;                   
                 }
             }
+        //Otherwise, run accordingly    
         } else {
             return true;
         }
@@ -127,7 +196,9 @@ function dateBlurFunc() {
     var val = document.getElementById("dateVal").value;
     if(validateDate(val) === false) {
         alert('Your date is incorrect or is formatted incorrectly.');
-        document.getElementById("dateVal").value = "";  
+        document.getElementById("dateVal").value = "";
+        document.getElementById("dateVal").blur();
+
     } else {
         document.getElementById("dateHidden").value = val;
         var updated = document.getElementById("dateHidden").value;

@@ -28,14 +28,15 @@
     /* Print test variables */
     echo $_SESSION["teamName"] . "\n";
     
-    try {
-        $query = "insert into team(team_name) values('" . $_SESSION["teamName"] . "')";
-        $result = mysqli_query($con, $query);
+    $query = "insert into team(team_name) values('" . $_SESSION["teamName"] . "')";
+    $result = mysqli_query($con, $query);
+    
+    if($con->errno) {
+        $con->rollback();
+        echo "<br><br>Failed to create team.\nError: " . $con->error;
+    } else {
         $con->commit();
         echo "<br><br>Successfully created team " . $_SESSION[teamName] . "\n";
-    } catch (Exception $e) {
-        $con->rollback();
-        echo "<br><br>Failed to create team.";
     }
     
     ?>

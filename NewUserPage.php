@@ -32,20 +32,22 @@
     //echo $_SESSION["fullName"] . "\n";
     //echo $_SESSION["teamName"] ."\n";
     
-    try {
-        $getTIDQuery = "select team_id from team where team_name = '" . $_SESSION["teamName"] . "'";
-        $result = mysqli_query($con, $getTIDQuery);
-        $row = mysqli_fetch_array($result);
-        $teamID = $row[0];
-        
-        $query = "insert into team_member(bethel_id, name, team_id) values(" . $_SESSION["bethelID"] . ", '" . $_SESSION["fullName"] . "', " . $teamID . ")";
-        $result = mysqli_query($con, $query);
+    $getTIDQuery = "select team_id from team where team_name = '" . $_SESSION["teamName"] . "'";
+    $result = mysqli_query($con, $getTIDQuery);
+    $row = mysqli_fetch_array($result);
+    $teamID = $row[0];
+    
+    $query = "insert into team_member(bethel_id, name, team_id) values(" . $_SESSION["bethelID"] . ", '" . $_SESSION["fullName"] . "', " . $teamID . ")";
+    $result = mysqli_query($con, $query);
+    
+    if($con->errno){
+        $con->rollback();
+        echo "<br><br>Failed to create user.\nError: " . $con->error;
+    } else {
         $con->commit();
         echo "<br><br>Successfully created user with name " . $_SESSION["fullName"] . ".";
-    } catch (Exception $e) {
-        $con->rollback();
-        echo "<br><br>Failed to create user.";
     }
+    
     
     ?>
 </div>

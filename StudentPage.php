@@ -47,7 +47,7 @@
 					<h3>Quadrant</h3>
 					<p>Latitude: <input type="text" id="latitudeVal" name="Latitute" value="" required="required" onblur="latitudeValFunc()" /></p>
 					<p>Longitude: <input type="text" id="longitudeVal" name="Longitude" value="" required="required" onblur="longitudeValFunc()" /></p>
-					<p>Quadrant Size: <input type="text" id="quadSizeVal" name="QuadrantSize" value="" required="required" onblur="quadSizeValFunc()" /></p>
+					<p>Quadrant Size (in square meters): <input type="text" id="quadSizeVal" name="QuadrantSize" value="" required="required" onblur="quadSizeValFunc()" /></p>
 					
 					<h3>Buckthorn</h3>
 					<p># Buckthorn Stems: <input type="text" id="buckthornStemVal" name="BuckthornStems" value="" onblur="buckthornStemValFunc()" /></p>

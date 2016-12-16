@@ -61,12 +61,18 @@
 					echo "<h3><u>List of all Teams in the Database:</u></h3>";
 					$query = "select team_id as 'Team ID', team_name as 'Team Name' from team";
 					$result = mysqli_query($con, $query);
-					echo "<tr><th>Team ID</th><th>Team Name</th></tr>";
+					//echo "<tr><th>Team ID</th><th>Team Name</th></tr>";
 					while($row = mysqli_fetch_array($result)) 
 					{	
-						echo "<tr><td>" . $row['Team ID'] . "</td><td>" . $row['Team Name'] . "</td></tr>\n"; 	
+						echo "<h3>" . $row['Team ID'] . "&nbsp" . $row['Team Name'] . "</h3>";
+                        $subquery = "select name as 'Name', bethel_id as 'Bethel ID' from team_member where team_id = " . $row['Team ID'];
+                        $subresult = mysqli_query($con, $subquery);
+                        while($subrow = mysqli_fetch_array($subresult))
+                        {
+                            echo "&nbsp" . $subrow['Name'] . "&nbsp" . $subrow['Bethel ID'];
+                        }
 					}
-				}  
+				}
 			?>
 		</table>
 	</div>

@@ -19,7 +19,8 @@
 			<input type="radio" name="radioB" id="radio1" value="allData">Generate all Data</input><br>
 			<input type="radio" name="radioB" id="radio2" value="teamName">Generate all Data from a Specific Team</input><br>		
 			<input type="radio" name="radioB" id="radio3" value="dataRange">Generate all Data Within a Specific Date Range</input><br>	
-			<input type="radio" name="radioB" id="radio4" value="teams">Generate a List of all the Teams</input>	
+			<input type="radio" name="radioB" id="radio4" value="teams">Generate a List of all the Teams</input><br>
+            <input type="radio" name="radioB" id="radio5" value="students">Generate a List of all Student Researchers</input>
 			<div id="wrapper">
 				<div id="teamInput" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 					<div class="t_inputBody">

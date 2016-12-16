@@ -73,6 +73,17 @@
                         }
 					}
 				}
+                else if($_SESSION["radioB"] == "students")
+                {
+                    echo "<h3><u>List of all student researchers in the Database:</u></h3>";
+                    $query = "select bethel_id as 'Bethel ID', name as 'Name' from team_member";
+                    $result = mysqli_query($con, $query);
+                    echo "<tr><th>Name</th><th>Bethel ID</th></tr>";
+                    while($row = mysqli_fetch_array($result))
+                    {
+                        echo "<tr><td>" . $row['Name'] . "</td><td>" . $row['Bethel ID'] . "</td></tr>\n";
+                    }
+                }
 			?>
 		</table>
 	</div>

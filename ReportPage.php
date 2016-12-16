@@ -17,7 +17,8 @@
 				$_SESSION["radioB"] = $_POST["radioB"];
 			  	$_SESSION["dateFieldStart"] = $_POST["dateFieldStart"];
 			  	$_SESSION["dateFieldEnd"] = $_POST["dateFieldEnd"];	
-			  	$_SESSION["teamField"] = $_POST["teamField"];			  	
+			  	$_SESSION["teamField"] = $_POST["teamField"];
+                $_SESSION["obsField"] = $_POST["obsField"];
 
 
 				if($_SESSION["radioB"] == "allData")
@@ -97,7 +98,7 @@
                 }
                 else if($_SESSION["radioB"] == "measurementIDReport")
                 {
-                    $obsID = 54; // Test value. Not sure how to gather observation ID from previous page / JavaScript?
+                    $obsID = $_SESSION["obsField"]; // Test value. Not sure how to gather observation ID from previous page / JavaScript?
                     echo "<h3><u>Observation # " . $obsID . ":</u></h3>";
                     $query1 = "select team.team_name, measurement.measurement_id, measurement.date, quadrant.latitude, quadrant.longitude, quadrant.size, quadrant.habitat_desc from team natural join measurement natural join quadrant where measurement.measurement_id = " . $obsID;
                     $query2 = "select num_stems, stem_density, foliar_coverage, median_stem_circum, sw_index from buckthorn natural join biodiversity where buckthorn.measurement_id = " . $obsID;

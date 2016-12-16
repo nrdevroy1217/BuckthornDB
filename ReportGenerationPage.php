@@ -42,6 +42,12 @@
 						</p>
 					</div>
 				</div>
+                <div id="obsInput" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="t_inputBody">
+                        <p>Please Enter an Observation ID</p>
+                        <input name="obsField" type="text" />
+                    </div>
+                </div>
 			</div>
 			<br>
 			<input type="submit" name="reportSubmit" value="Submit" />
@@ -50,7 +56,8 @@
 			  		$_SESSION["radioB"] = $_POST["radioB"];
 			  		$_SESSION["dateFieldStart"] = $_POST["dateFieldStart"];
 			  		$_SESSION["dateFieldEnd"] = $_POST["dateFieldEnd"];		
-			  		$_SESSION["teamField"] = $_POST["teamField"];				  			  		
+			  		$_SESSION["teamField"] = $_POST["teamField"];
+                    $_SESSION["obsField"] = $_POST["obsField"];
 			  	} 
    		    ?> 
 		</form>

@@ -18,5 +18,13 @@ $(document).ready(function () {
 	    	$("#teamInput").hide();
        		$("#dateInput").hide();
 	    }
+        else if (checkedValue == "students") {
+            $("#teamInput").hide();
+            $("#dateInput").hide();
+        }
+        else if (checkedValue == "measurementSummary") {
+            $("#teamInput").hide();
+            $("#dateInput").hide();
+        }
 	});
 });

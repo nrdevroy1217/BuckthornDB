@@ -84,6 +84,17 @@
                         echo "<tr><td>" . $row['Name'] . "</td><td>" . $row['Bethel ID'] . "</td></tr>\n";
                     }
                 }
+                else if($_SESSION["radioB"] == "measurementSummary")
+                {
+                    echo "<h3><u>Summary of all observations in the Database:</u></h3>";
+                    $query = "select measurement_id as 'Measurement ID', date as 'Date', team_name as 'Team Name' from measurement natural join team";
+                    $result = mysqli_query($con, $query);
+                    echo "<tr><th>Observation ID</th><th>Date</th><th>Team Name</th></tr>";
+                    while($row = mysqli_fetch_array($result))
+                    {
+                        echo "<tr><td>" . $row['Measurement ID'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Team Name'] . "</td></tr>\n";
+                    }
+                }
 			?>
 		</table>
 	</div>

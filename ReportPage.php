@@ -20,7 +20,7 @@
 			  	$_SESSION["teamField"] = $_POST["teamField"];
                 $_SESSION["obsField"] = $_POST["obsField"];
 
-
+                // Generate report of measurement and quadrant data for all measurements
 				if($_SESSION["radioB"] == "allData")
 				{
 					echo "<h3><u>List of all Observation Entries in the Database:</u></h3>";
@@ -32,6 +32,8 @@
 						echo "<tr><td>" . $row['team_name'] . "</td><td>" . $row['measurement_id'] . "</td><td>" . $row["date"] . "</td><td>" . $row["size"] . "</td><td width=\"150px\">" . $row["habitat_desc"] . "</td></tr>\n"; 	
 					}
 				}
+                
+                // Generate report of all observations completed by a team
 				else if($_SESSION["radioB"] == "teamName")
 				{
 					echo "<h3><u>List of all Observation Entries in the Database:</u></h3>";
@@ -42,9 +44,10 @@
 					while($row = mysqli_fetch_array($result)) 
 					{	
 						echo "<tr><td>" . $row['team_name'] . "</td><td>" . $row['measurement_id'] . "</td><td>" . $row["date"] . "</td><td>" . $row["size"] . "</td><td width=\"150px\">" . $row["habitat_desc"] . "</td></tr>\n"; 	
-					}	
-
+					}
 				}
+                
+                // Generate report of all observations within a date range
 				else if($_SESSION["radioB"] == "dataRange")
 				{
 					echo "<h3><u>List of all Observation Entries in the Database:</u></h3>";
@@ -57,15 +60,18 @@
 						echo "<tr><td>" . $row['team_name'] . "</td><td>" . $row['measurement_id'] . "</td><td>" . $row["date"] . "</td><td>" . $row["size"] . "</td><td width=\"150px\">" . $row["habitat_desc"] . "</td></tr>\n"; 	
 					}										
 				}
+                
+                // Generate report of all teams and their members
 				else if($_SESSION["radioB"] == "teams")
 				{
 					echo "<h3><u>List of all Teams in the Database:</u></h3>";
 					$query = "select team_id as 'Team ID', team_name as 'Team Name' from team";
 					$result = mysqli_query($con, $query);
-					//echo "<tr><th>Team ID</th><th>Team Name</th></tr>";
-					while($row = mysqli_fetch_array($result)) 
+					while($row = mysqli_fetch_array($result))
 					{	
 						echo "<h3>" . $row['Team ID'] . "&nbsp" . $row['Team Name'] . "</h3>";
+                        
+                        // Query and print all team members for the current team
                         $subquery = "select name as 'Name', bethel_id as 'Bethel ID' from team_member where team_id = " . $row['Team ID'];
                         $subresult = mysqli_query($con, $subquery);
                         while($subrow = mysqli_fetch_array($subresult))
@@ -74,6 +80,8 @@
                         }
 					}
 				}
+                
+                // Generate report of all students and their ID's
                 else if($_SESSION["radioB"] == "students")
                 {
                     echo "<h3><u>List of all student researchers in the Database:</u></h3>";
@@ -85,6 +93,8 @@
                         echo "<tr><td>" . $row['Name'] . "</td><td>" . $row['Bethel ID'] . "</td></tr>\n";
                     }
                 }
+                
+                // Generate summary report of all observations
                 else if($_SESSION["radioB"] == "measurementSummary")
                 {
                     echo "<h3><u>Summary of all observations in the Database:</u></h3>";
@@ -96,6 +106,8 @@
                         echo "<tr><td>" . $row['Measurement ID'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Team Name'] . "</td></tr>\n";
                     }
                 }
+                
+                // Generate report of all data for a selected observation
                 else if($_SESSION["radioB"] == "measurementIDReport")
                 {
                     $obsID = $_SESSION["obsField"]; // Test value. Not sure how to gather observation ID from previous page / JavaScript?

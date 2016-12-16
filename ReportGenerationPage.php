@@ -23,13 +23,16 @@
             <input type="radio" name="radioB" id="radio5" value="students">Generate a List of all Student Researchers</input><br>
             <input type="radio" name="radioB" id="radio6" value="measurementSummary">Generate a summary of all observations</input><br>
             <input type="radio" name="radioB" id="radio7" value="measurementIDReport">Generate all data for an observation</input>
-			<div id="wrapper">
+
+            <div id="wrapper">
+                // Team Input panel - displays when team name input is required
 				<div id="teamInput" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 					<div class="t_inputBody">
 						<p>Please Enter a Team Name</p>
 						<input name="teamField" type="text" />
 					</div>
 				</div>
+                // Date Input panel - displays when date range input is required
 				<div id="dateInput" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 					<div class="d_inputBody">
 						<br>
@@ -42,6 +45,7 @@
 						</p>
 					</div>
 				</div>
+                // Observation Number Input panel - displays when observation number input is required
                 <div id="obsInput" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                     <div class="t_inputBody">
                         <p>Please Enter an Observation ID</p>

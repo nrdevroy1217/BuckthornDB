@@ -11,9 +11,11 @@
 		<h4>Please Enter the Measurement ID of the Observation you would like to Delete</h4>
 	</div>
 	<div id="main">
+
+        // Form to accept Measurement ID from user
 		<form id="form1" action="TesterPage.php" method="post">
 			<p>Enter Measurement ID</p>
-			<input name="deleteMeasurementID" type="text" required="required" />
+			<input name="deleteMeasurementID" type="text" required="required" /> // Measurement ID to be deleted
 			<input type="submit" name="d_measurementSubmit" value="Submit" />
 			<?php
 			  	if(isset($_POST["d_measurementSubmit"])) { 
@@ -21,6 +23,7 @@
 			  	} 
 			?> 
 		</form>
+
 	</div>
 </body>
 </html>

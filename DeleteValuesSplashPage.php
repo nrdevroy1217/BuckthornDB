@@ -22,15 +22,16 @@
 			</ul>
 
 			<!-- TEAM OPTION -->
+            // Allows user to delete a team
 			<div id="Team" class="tabcontent">
 				<form id="form1" action="TesterPage.php" method="post">
 					<h3>Team Delete</h3>
 					<select name ="teamOption">
-			  		  <option value="TeamID">Team ID</option>
-			  		  <option value="TeamName">Team Name</option>
+			  		  <option value="TeamID">Team ID</option> // If selected, allows user to delete by team ID
+			  		  <option value="TeamName">Team Name</option> // If selected, allows user to delete by team name
 			  		</select>
 			  		<br><br>
-			  		<input name="deleteTeamID" type="text" required="required" />
+			  		<input name="deleteTeamID" type="text" required="required" /> // 
 					<input type="submit" name="d_teamSubmit" value="Submit" />
 					<?php
 					  	if(isset($_POST["d_teamSubmit"])) { 

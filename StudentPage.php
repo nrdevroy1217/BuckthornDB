@@ -1,9 +1,9 @@
 <!DOCTYPE html> 
 <html>
-	<head>
+	<head>	
 		<link href="http://www.mathcs.bethel.edu/~nrd83539/student.css" rel="stylesheet">
 		<script type="text/javascript" src="http://www.mathcs.bethel.edu/~nrd83539/studentScript.js"></script>		
-			<title>Student Access</title>
+		<title>Student Access</title>
 		</head>
 		<body>
 		<div id="headerPanel">
@@ -12,16 +12,16 @@
 		<div id="tabbedPane">
 			<ul class="tab">
 				<li>
-					<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'TeamInfo')">Team Info</a>
+					<a href="javascript:void(0)"  id="tab1" class="tablinks" onclick="openTab(event, 'TeamInfo')">Team Info</a>
 				</li>
 				<li>
-					<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'BuckthornInfo')">Buckthorn Info</a>
+					<a href="javascript:void(0)" id="tab2" class="tablinks" onclick="openTab(event, 'BuckthornInfo')">Buckthorn Info</a>
 				</li>
 				<li>
-					<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'BiodiversityInfo')">Biodiversity Info</a>
+					<a href="javascript:void(0)" id="tab3" class="tablinks" onclick="openTab(event, 'BiodiversityInfo')">Biodiversity Info</a>
 				</li>
 				<li>
-					<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'SubmitTab')">Submit</a>
+					<a href="javascript:void(0)" id="tab4" class="tablinks" onclick="openTab(event, 'SubmitTab'); submitFunc()">Submit</a>
 				</li>	
 			</ul>
 			<!-- Content for Team Info Tab -->			
@@ -54,7 +54,6 @@
 					<p>Buckthorn Stem Density: <input type="text" id="buckthornDensityVal" name="BuckthornDensity" value="" onblur="buckthornDensityValFunc()" /></p>
 					<p>% Buckthorn Foliar Coverage: <input type="text" id="buckthornCoverageVal" name="BuckthornCoverage" value="" onblur="buckthornCoverageValFunc()" /></p>
 					<p>Median Buckthorn Stem: <input type="text" id="medBuckthornVal" name="MedianBuckthorn" value="" onblur="medBuckthornValFunc()" /></p>
-					<p>Habitat description: </br><textarea name="HabitatDesc" id="habDescVal" value="" rows="5" cols="50" onblur="habDescValFunc()" ></textarea></p>
 					<p>Other Notes: </br><textarea name="OtherNotes" id="otherNotesVal"value="" rows="5" cols="50" onblur="otherNotesValFunc()"></textarea></p>
 				</form>
 			</div>
@@ -74,10 +73,20 @@
 				<form id="sendData" action="ObservationTestPage.php" method="post">
 				
 				<!-- Submit Button -->
-				<input type="submit" name="submit" value="Submit" />
+				<input type="submit" id="submitB" name="submit" value="Submit" />
 				
+				<!-- Run quick script to start on "Team Info" Page, so user can't bypass -->
+				<script type="text/javascript">
+				   document.getElementById("tab1").click();
+				</script>
+				<?php					
+					$query = "select team_name from team";
+					$result = mysqli_query($con, $query);
+					$row = mysqli_fetch_array($result);
+					$t_name = $row[0];
+					echo "<input type=\"hidden\" id=\"teamNameHidden\" name=\"teamNameHidden\" value=\"" . $t_name . "\"/>";				
+				?>					
 				<!-- Hidden Fields -->
-				<input type="hidden" id="teamNameHidden" name="teamNameHidden" value="0"/>
 				<input type="hidden" id="dateHidden" name="dateHidden" value="0"/>
 				<input type="hidden" id="latitudeHidden" name="latitudeHidden" value="0"/>
 				<input type="hidden" id="longitudeHidden" name="longitudeHidden" value="0"/>
@@ -86,7 +95,6 @@
 				<input type="hidden" id="buckthornDensityHidden" name="buckthornDensityHidden" value="0"/>
 				<input type="hidden" id="buckthornCoverageHidden" name="buckthornCoverageHidden" value="0"/>
 				<input type="hidden" id="medianBuckthornHidden" name="medianBuckthornHidden" value="0"/>
-				<input type="hidden" id="habitatDescHidden" name="habitatDescHidden" value="0"/>
 				<input type="hidden" id="otherNotesHidden" name="otherNotesHidden" value="0"/>	
 				<input type="hidden" id="speciesHidden" name="speciesHidden" value="0"/>	
 				<input type="hidden" id="swiHidden" name="swiHidden" value="0"/>	
@@ -102,7 +110,6 @@
 					$_SESSION["BuckthornDensity"] = $_POST["buckthornDensityHidden"];
 					$_SESSION["BuckthornCoverage"] = $_POST["buckthornCoverageHidden"];
 					$_SESSION["MedianBuckthorn"] = $_POST["medianBuckthornHidden"];
-					$_SESSION["HabitatDesc"] = $_POST["habitatDescHidden"];
 					$_SESSION["OtherNotes"] = $_POST["otherNotesHidden"];
 					$_SESSION["SpeciesA"] = $_POST["speciesHidden"];
 					$_SESSION["SWI"] = $_POST["swiHidden"];
